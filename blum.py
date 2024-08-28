@@ -9,46 +9,44 @@ import datetime
 from colorama import init, Fore, Style
 init(autoreset=True)
 
-
 total_balance_all_accounts = 0  # Initialize total balance variable
 start_time = datetime.datetime.now()  # Tentukan waktu mulai saat bot dijalankan
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Blum BOT')
+    parser.add_argument('--tribe', type=str, choices=['1', '2'], help='Select Tribe: 1 for [Ghalibie] Lounge, 2 for Custom Tribe')
     parser.add_argument('--task', type=str, choices=['y', 'n'], help='Cek and Claim Task (y/n)')
     parser.add_argument('--reff', type=str, choices=['y', 'n'], help='Apakah ingin claim ref? (y/n, default n)')
     args = parser.parse_args()
 
+    # Default values jika tidak diberikan argumen
+    if args.tribe is None:
+        args.tribe = "1"  # Default to tribe 1
+
     if args.task is None:
-        # Jika parameter --task tidak diberikan, minta input dari pengguna
-        task_input = input("Apakah Anda ingin cek dan claim task? (y/n, default n): ").strip().lower()
-        # Jika pengguna hanya menekan enter, gunakan 'n' sebagai default
-        args.task = task_input if task_input in ['y', 'n'] else 'n'
+        args.task = "n"  # Default to 'n'
 
     if args.reff is None:
-        # Jika parameter --claim_ref tidak diberikan, minta input dari pengguna
-        reff_input = input("Apakah ingin claim ref? (y/n, default n): ").strip().lower()
-        # Jika pengguna hanya menekan enter, gunakan 'n' sebagai default
-        args.reff = reff_input if reff_input in ['y', 'n'] else 'n'
+        args.reff = "n"  # Default to 'n'
 
     return args
 
-while True:
-    print(Fore.YELLOW + Style.BRIGHT + f"Select Tribe: ")
-    print(Fore.YELLOW + Style.BRIGHT + f"1. [ Ghalibie ] Lounge")
-    print(Fore.YELLOW + Style.BRIGHT + f"2. Custom Tribe (Input your tribe id)")
-    tribe_selection = input(Fore.YELLOW + Style.BRIGHT + "Select Tribe: ").strip()
-    if tribe_selection == "1":
-        tribe_id = "4cc96181-1cd3-4494-ae49-7b7cb0e81eff"
-        break
-    elif tribe_selection == "2":
-        print(Fore.YELLOW + Style.BRIGHT + "HAH !!! SIKE !!!, MODIF THE CODE BY YOURSELF IF YOU WANT TO CUSTOM JOIN THE TRIBE !!")
-        print(Fore.YELLOW + Style.BRIGHT + "Using default tribe: PENCAIRAN BANSOS (Public)")
-        tribe_id = "a4578390-4329-4663-b83a-4186d52abafc"
-        break
-    else:
-        print(Fore.RED + Style.BRIGHT + "Invalid selection. Please select again.")
-    
+args = parse_arguments()
+
+# Pemilihan Tribe berdasarkan argumen
+if args.tribe == "1":
+    tribe_id = "4cc96181-1cd3-4494-ae49-7b7cb0e81eff"
+elif args.tribe == "2":
+    print(Fore.YELLOW + Style.BRIGHT + "HAH !!! SIKE !!!, MODIF THE CODE BY YOURSELF IF YOU WANT TO CUSTOM JOIN THE TRIBE !!")
+    print(Fore.YELLOW + Style.BRIGHT + "Using default tribe: PENCAIRAN BANSOS (Public)")
+    tribe_id = "a4578390-4329-4663-b83a-4186d52abafc"
+else:
+    print(Fore.RED + Style.BRIGHT + "Invalid selection. Exiting.")
+    exit(1)
+
+print(Fore.YELLOW + Style.BRIGHT + f"Selected Tribe: {tribe_id}")
+print(Fore.YELLOW + Style.BRIGHT + f"Task Option: {args.task}")
+print(Fore.YELLOW + Style.BRIGHT + f"Ref Option: {args.reff}")
 
 def check_tasks(token):
     headers = {
