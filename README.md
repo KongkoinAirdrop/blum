@@ -79,8 +79,8 @@ sudo systemctl restart initiad
 ```
 
 11. cek log
-    ```bash
-    sudo journalctl -u blum -f
-    ```
+```bash
+sudo journalctl -u blum -f
+```
 
    
