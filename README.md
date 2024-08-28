@@ -2,7 +2,7 @@
 # BLUM Crypto
 BLUM CRYPTO
 
-Register Here : [BlumCrypto](https://t.me/blum/app?startapp=ref_lHZLjPuq0F)
+Register Here : [BlumCrypto](https://t.me/blum/app?startapp=ref_B8UnvOLY8b)
 
 ## Features
 - Auto Clear Task
