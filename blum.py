@@ -24,10 +24,10 @@ def parse_arguments():
         args.tribe = "1"  # Default to tribe 1
 
     if args.task is None:
-        args.task = "n"  # Default to 'n'
+        args.task = "y"  # Default to 'n'
 
     if args.reff is None:
-        args.reff = "n"  # Default to 'n'
+        args.reff = "y"  # Default to 'n'
 
     return args
 
@@ -219,7 +219,7 @@ def get_new_token(query_id):
     data = json.dumps({"query": query_id})
 
     # URL endpoint
-    url = "https://gateway.blum.codes/v1/auth/provider/PROVIDER_TELEGRAM_MINI_APP"
+    url = "https://user-domain.blum.codes/api/v1/auth/provider/PROVIDER_TELEGRAM_MINI_APP"
 
     # Mencoba mendapatkan token hingga 3 kali
     for attempt in range(3):
@@ -435,7 +435,7 @@ def claim_balance_friend(token):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0'
     }
     try:
-        response = requests.post('https://gateway.blum.codes/v1/friends/claim', headers=headers)
+        response = requests.post('https://user-domain.blum.codes/api/v1/friends/claim', headers=headers)
         return response.json()
     except requests.exceptions.ConnectionError as e:
         print(f"{Fore.RED+Style.BRIGHT}Gagal mengklaim saldo teman karena masalah koneksi: {e}")
